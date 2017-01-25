@@ -20,5 +20,6 @@
 @property(nonatomic, weak) id<VideoTableViewCellProtocol> delegate;
 @property(nonatomic, strong) IBOutlet UIImageView *imgView;
 @property(nonatomic, strong) IBOutlet UILabel *lblDetails;
+@property(nonatomic, strong) IBOutlet NSString *videoUrl;
 
 @end

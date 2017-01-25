@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="VideoCell" id="gTV-IL-0wX" customClass="VideoPagerViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="354" height="183"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="354" height="183"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tDi-bh-f1R">
+                        <rect key="frame" x="0.0" y="0.0" width="354" height="183"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5L4-ci-xRS">
+                                <rect key="frame" x="0.0" y="0.0" width="354" height="183"/>
+                            </imageView>
+                            <button hidden="YES" opaque="NO" contentMode="right" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nHS-em-UHW">
+                                <rect key="frame" x="148.5" y="63" width="56" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="nHS-em-UHW" secondAttribute="height" multiplier="1:1" id="DoC-tu-c8p"/>
+                                </constraints>
+                                <state key="normal" image="play_icon"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="nHS-em-UHW" firstAttribute="centerX" secondItem="tDi-bh-f1R" secondAttribute="centerX" id="Bj9-bn-fmU"/>
+                            <constraint firstItem="nHS-em-UHW" firstAttribute="centerY" secondItem="tDi-bh-f1R" secondAttribute="centerY" id="Hbz-xR-hnq"/>
+                            <constraint firstAttribute="bottom" secondItem="5L4-ci-xRS" secondAttribute="bottom" id="R4W-4X-hcc"/>
+                            <constraint firstAttribute="trailing" secondItem="5L4-ci-xRS" secondAttribute="trailing" id="WVQ-1s-BIA"/>
+                            <constraint firstItem="5L4-ci-xRS" firstAttribute="top" secondItem="tDi-bh-f1R" secondAttribute="top" id="dAh-f9-mfw"/>
+                            <constraint firstItem="nHS-em-UHW" firstAttribute="width" secondItem="tDi-bh-f1R" secondAttribute="height" multiplier="58:189" id="eUx-9K-fWb"/>
+                            <constraint firstItem="5L4-ci-xRS" firstAttribute="leading" secondItem="tDi-bh-f1R" secondAttribute="leading" id="pOu-N0-wGC"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="tDi-bh-f1R" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="G5c-Iq-KrS"/>
+                <constraint firstItem="tDi-bh-f1R" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="NnT-8H-jsS"/>
+                <constraint firstAttribute="trailing" secondItem="tDi-bh-f1R" secondAttribute="trailing" id="mwp-iS-kwP"/>
+                <constraint firstAttribute="bottom" secondItem="tDi-bh-f1R" secondAttribute="bottom" id="x47-mC-sez"/>
+            </constraints>
+            <size key="customSize" width="163" height="189"/>
+            <connections>
+                <outlet property="imageView" destination="5L4-ci-xRS" id="5Kr-z2-uxF"/>
+                <outlet property="playButton" destination="nHS-em-UHW" id="zhn-gJ-sJB"/>
+            </connections>
+            <point key="canvasLocation" x="-319.5" y="-12.5"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="play_icon" width="58" height="59"/>
+    </resources>
+</document>

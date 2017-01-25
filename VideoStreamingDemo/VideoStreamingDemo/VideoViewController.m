@@ -55,7 +55,7 @@ NSString *const kTestAppAdTagUrl =
     NSLog( @"<%d - (%s)>", __LINE__, __FUNCTION__);
     [super viewDidLoad];
     
-    [self addPlayer];
+//    [self addPlayer];
     
 //    [self setUpContentPlayer];
 //    [self setupAdsLoader];
@@ -82,21 +82,20 @@ NSString *const kTestAppAdTagUrl =
 #pragma mark Private Methods
 #pragma mark ==============================
 
-- (void) addPlayer {
+- (void) addPlayerWithURL:(NSURL *) url {
     NSLog( @"<%d - (%s)>", __LINE__, __FUNCTION__);
     
     self.player = [[GUIPlayerView alloc] initWithFrame:CGRectMake(0,50, self.playerView.frame.size.width, self.playerView.frame.size.height)];
     [self.player setDelegate:self];
     [self.view addSubview:self.player];
-    //NSURL *URL1 = [NSURL URLWithString:@"http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"];
-    //NSURL *URL2 = [NSURL URLWithString:@"http://techslides.com/demos/sample-videos/small.mp4"];
-    NSURL *URL3 = [NSURL URLWithString:@"https://www.dropbox.com/s/1szc1a4un6ouf7i/ios1.mp4?dl=0"];
-    //NSURL *URL4 = [NSURL URLWithString:@"http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"];
-    [self.player setVideoURL:URL3];
-    
-    [self.player prepareAndPlayAutomatically:YES];
     [self.view bringSubviewToFront:self.player];
     
+    [self.player setVideoURL:url];
+    [self.player prepareAndPlayAutomatically:NO];
+    [self.player play];
+    
+    
+    [self.player prepareAndPlayAutomatically:NO];
     [self.player play];
 }
 
@@ -235,17 +234,18 @@ NSString *const kTestAppAdTagUrl =
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     //NSLog( @"<%d - (%s)>", __LINE__, __FUNCTION__);
-    return 1;
+    return videoArray.count;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     //NSLog( @"<%d - (%s)>", __LINE__, __FUNCTION__);
-    return videoArray.count;
+    return 1;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     //NSLog( @"<%d - (%s)>", __LINE__, __FUNCTION__);
+    NSLog(@"--Row: %ld",(long)indexPath.row);
     VideoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"VideoTableViewCell"];
     cell.clipsToBounds =YES;
     [self configureCell:cell forRowAtIndexPath:indexPath];
@@ -254,12 +254,23 @@ NSString *const kTestAppAdTagUrl =
 
 - (void)configureCell:(VideoTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     //NSLog( @"<%d - (%s)>", __LINE__, __FUNCTION__);
+    NSLog(@"Row: %ld",(long)indexPath.row);
     NSDictionary *videoDict = [[NSDictionary alloc] initWithDictionary:videoArray[indexPath.row]]; //;
     cell.lblDetails.text = [videoDict valueForKey:@"videoDetails"];
     [cell.imgView sd_setImageWithURL:[NSURL URLWithString:[videoDict objectForKey:@"imageUrl"]]
                  placeholderImage:[UIImage imageNamed:@""]
                           options:SDWebImageRefreshCached];
+    cell.videoUrl = [videoDict valueForKey:@"videoUrl"];
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *videoDict = [[NSDictionary alloc] initWithDictionary:videoArray[indexPath.row]];
+    NSString *urlString =  [videoDict valueForKey:@"videoUrl"];
+    //NSURL *URL = [NSURL URLWithString:@"http://www.kapsolutions.in/atul/poc_video/android/android1.mp4"];
+    NSURL *URL = [NSURL URLWithString:urlString];
+    [self.player clean];
+    [self addPlayerWithURL:URL];
+
+}
 
 @end
