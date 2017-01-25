@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5MK-8H-Obr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UMx-lj-YPl" userLabel="HeaderView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="1lo-l5-luv"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hhZ-hZ-KNd" userLabel="PlaylistView">
+                                <rect key="frame" x="0.0" y="284" width="375" height="384"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R5U-MV-qqF" userLabel="PlayerView">
+                                <rect key="frame" x="0.0" y="50" width="375" height="234"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="R5U-MV-qqF" firstAttribute="height" secondItem="5MK-8H-Obr" secondAttribute="height" multiplier="0.35" id="2p0-Hn-tOY"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hhZ-hZ-KNd" secondAttribute="bottom" constant="-1" id="8Bj-si-OMy"/>
+                            <constraint firstItem="R5U-MV-qqF" firstAttribute="top" secondItem="UMx-lj-YPl" secondAttribute="bottom" id="L7X-No-ZBG"/>
+                            <constraint firstAttribute="trailing" secondItem="hhZ-hZ-KNd" secondAttribute="trailing" id="Tws-be-WpI"/>
+                            <constraint firstItem="hhZ-hZ-KNd" firstAttribute="leading" secondItem="5MK-8H-Obr" secondAttribute="leading" id="Yvk-PH-y7H"/>
+                            <constraint firstAttribute="trailing" secondItem="R5U-MV-qqF" secondAttribute="trailing" id="Zoh-5y-1bq"/>
+                            <constraint firstItem="UMx-lj-YPl" firstAttribute="top" secondItem="5MK-8H-Obr" secondAttribute="top" id="djN-Pw-DkC"/>
+                            <constraint firstAttribute="trailing" secondItem="UMx-lj-YPl" secondAttribute="trailing" id="fSI-L0-j8m"/>
+                            <constraint firstItem="hhZ-hZ-KNd" firstAttribute="top" secondItem="R5U-MV-qqF" secondAttribute="bottom" id="meN-ES-LjR"/>
+                            <constraint firstItem="UMx-lj-YPl" firstAttribute="leading" secondItem="5MK-8H-Obr" secondAttribute="leading" id="twc-Qc-EP3"/>
+                            <constraint firstItem="R5U-MV-qqF" firstAttribute="leading" secondItem="5MK-8H-Obr" secondAttribute="leading" id="xhp-MW-RQg"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="playerView" destination="R5U-MV-qqF" id="LEv-za-Rpd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="628" y="18"/>
+        </scene>
+    </scenes>
+</document>
