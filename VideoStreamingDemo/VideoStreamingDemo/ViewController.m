@@ -72,7 +72,7 @@
 
 - (BOOL)prefersStatusBarHidden
 {
-    return NO;
+    return YES;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
@@ -119,7 +119,7 @@
 }
 
 -(void)setPageIndicator {
-    [pageControl setNumberOfPages:10];
+    [pageControl setNumberOfPages:4];
     [pageControl setCurrentPage:0];
 }
 
@@ -163,13 +163,17 @@
     return categoryName;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 175;
+}
+
 #pragma mark -
 #pragma mark ==============================
 #pragma mark CollectionViewDatasource
 #pragma mark ==============================
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 10;
+    return 4;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -179,7 +183,10 @@
     return  cell;
 }
 
-
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 20; // This is the minimum inter item spacing, can be more
+}
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     int currentPage  = (int)(scrollView.contentOffset.x / scrollView.frame.size.width);
