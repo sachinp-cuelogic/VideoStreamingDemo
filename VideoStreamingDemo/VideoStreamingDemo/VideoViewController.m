@@ -7,20 +7,27 @@
 //
 
 #import "VideoViewController.h"
+#import "SDWebImage/UIImageView+WebCache.h"
 
 @interface VideoViewController () <GUIPlayerViewDelegate,IMAAdsLoaderDelegate,IMAAdsManagerDelegate>
 
 @property (nonatomic, strong) GUIPlayerView* player;
 @property (nonatomic, strong) IBOutlet UIView* playerView;
+@property (nonatomic, strong) IBOutlet UITableView* tblView;
 @property (nonatomic, strong) IMAAdsLoader *adsLoader;
 
 @property(nonatomic, strong) IMAAVPlayerContentPlayhead *contentPlayhead;
 @property(nonatomic, strong) IMAAdsManager *adsManager;
 @property(nonatomic, strong) IMACompanionAdSlot *companionSlot;
 
+
 @end
 
 @implementation VideoViewController
+
+NSArray *videoArray;
+
+@synthesize videoListDict;
 
 NSString *const kTestAppAdTagUrl =
 @"https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&"
@@ -53,6 +60,21 @@ NSString *const kTestAppAdTagUrl =
     [self setUpContentPlayer];
     [self setupAdsLoader];
     [self requestAds];
+    
+    [self readPlistFile];
+}
+
+#pragma mark -
+#pragma mark ==============================
+#pragma mark
+#pragma mark ==============================
+
+- (void) readPlistFile {
+    NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"VideoData" ofType:@"plist"];
+    NSDictionary *contentDict = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+    videoArray = [NSArray arrayWithObject:[contentDict valueForKey:@"iOS"]][0];
+    //videoArray = [NSArray arrayWithObject:[contentDict objectForKey:@"iOS"]];
+    [_tblView reloadData];
 }
 
 #pragma mark -
@@ -207,8 +229,47 @@ NSString *const kTestAppAdTagUrl =
 
 #pragma mark -
 #pragma mark ==============================
-#pragma mark TableView Delegates
+#pragma mark TableViewDelegates
 #pragma mark ==============================
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    NSLog( @"<%d - (%s)>", __LINE__, __FUNCTION__);
+    return 1;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    NSLog( @"<%d - (%s)>", __LINE__, __FUNCTION__);
+    return videoArray.count;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog( @"<%d - (%s)>", __LINE__, __FUNCTION__);
+    VideoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"VideoTableViewCell"];
+    cell.clipsToBounds =YES;
+    [self configureCell:cell forRowAtIndexPath:indexPath];
+    return cell;
+}
+
+- (void)configureCell:(VideoTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog( @"<%d - (%s)>", __LINE__, __FUNCTION__);
+    NSArray *videoDataArr = videoArray[indexPath.row];
+   // NSDictionary *videoDict =
+//    cell.lblDetails = [videoDict valueForKey:@"videoDetails"];
+//    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:[videoDict objectForKey:@"videoUrl"]]
+//                 placeholderImage:[UIImage imageNamed:@""]
+//                          options:SDWebImageRefreshCached];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    NSLog( @"<%d - (%s)>", __LINE__, __FUNCTION__);
+    NSString *categoryName = @"Android";
+    return categoryName;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 40.0f;
+}
 
 @end

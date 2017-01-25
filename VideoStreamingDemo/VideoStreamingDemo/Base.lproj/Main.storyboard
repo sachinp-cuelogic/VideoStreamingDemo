@@ -29,9 +29,59 @@
                                     <constraint firstAttribute="height" constant="50" id="1lo-l5-luv"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hhZ-hZ-KNd" userLabel="PlaylistView">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="121" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hhZ-hZ-KNd" userLabel="PlaylistView">
                                 <rect key="frame" x="0.0" y="284" width="375" height="384"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VideoTableViewCell" rowHeight="100" id="sOa-YK-s75" customClass="VideoTableViewCell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sOa-YK-s75" id="pNm-qq-WNY">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yh4-Kx-fgp">
+                                                    <rect key="frame" x="10" y="10" width="112.5" height="79.5"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="51s-N9-hx0">
+                                                    <rect key="frame" x="130.5" y="8" width="236.5" height="81.5"/>
+                                                    <string key="text">This email communication (including any attachments) contains information which is confidential and may be legally privileged. It is for the exclusive use of the intended recipient/s. If you are not the intended recipient, please delete this email communication (including any attachments) and hard copies immediately, please preserve its confidentiality and notify the sender. Any unauthorized use or dissemination of this email communication (including any attachments) in any manner whatsoever, in whole or in part, is strictly prohibited. </string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oc6-j8-aDj">
+                                                    <rect key="frame" x="0.0" y="97" width="375" height="2"/>
+                                                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="2" id="63h-FM-bEo"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="51s-N9-hx0" secondAttribute="trailing" constant="8" id="2xx-SH-NHB"/>
+                                                <constraint firstAttribute="bottom" secondItem="51s-N9-hx0" secondAttribute="bottom" constant="10" id="5qb-Wu-7zq"/>
+                                                <constraint firstAttribute="trailing" secondItem="oc6-j8-aDj" secondAttribute="trailing" id="9B3-mH-5nA"/>
+                                                <constraint firstItem="oc6-j8-aDj" firstAttribute="leading" secondItem="pNm-qq-WNY" secondAttribute="leading" id="EIB-Gg-BiR"/>
+                                                <constraint firstAttribute="bottom" secondItem="Yh4-Kx-fgp" secondAttribute="bottom" constant="10" id="N5G-Ta-gkV"/>
+                                                <constraint firstItem="Yh4-Kx-fgp" firstAttribute="top" secondItem="pNm-qq-WNY" secondAttribute="top" constant="10" id="S0S-dG-bnh"/>
+                                                <constraint firstAttribute="bottom" secondItem="oc6-j8-aDj" secondAttribute="bottom" id="WqH-oN-JJx"/>
+                                                <constraint firstItem="Yh4-Kx-fgp" firstAttribute="leading" secondItem="pNm-qq-WNY" secondAttribute="leading" constant="10" id="cyy-MB-ePA"/>
+                                                <constraint firstItem="51s-N9-hx0" firstAttribute="top" secondItem="pNm-qq-WNY" secondAttribute="top" constant="8" id="vY7-b9-r1A"/>
+                                                <constraint firstItem="Yh4-Kx-fgp" firstAttribute="width" secondItem="pNm-qq-WNY" secondAttribute="width" multiplier="0.3" id="wor-Xg-DfR"/>
+                                                <constraint firstItem="51s-N9-hx0" firstAttribute="leading" secondItem="Yh4-Kx-fgp" secondAttribute="trailing" constant="8" id="yDE-Yv-rjp"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="imgView" destination="Yh4-Kx-fgp" id="QPZ-rX-C42"/>
+                                            <outlet property="lblDetails" destination="51s-N9-hx0" id="wAl-z8-VJL"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="gAv-Ik-57M"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="4lr-qE-hH8"/>
+                                </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R5U-MV-qqF" userLabel="PlayerView">
                                 <rect key="frame" x="0.0" y="50" width="375" height="234"/>
@@ -56,11 +106,12 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="playerView" destination="R5U-MV-qqF" id="LEv-za-Rpd"/>
+                        <outlet property="tblView" destination="hhZ-hZ-KNd" id="zX3-9Y-8xz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="628" y="18"/>
+            <point key="canvasLocation" x="628" y="17.541229385307346"/>
         </scene>
     </scenes>
 </document>

@@ -9,9 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "GUIPlayerView.h"
 #import <GoogleInteractiveMediaAds/GoogleInteractiveMediaAds.h>
+#import "VideoTableViewCell.h"
 
 @interface VideoViewController : UIViewController
+{
+    
+}
 
+@property (nonatomic,strong) NSDictionary *videoListDict;
 
 @end
 
