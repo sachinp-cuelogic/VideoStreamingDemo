@@ -10,6 +10,7 @@
 #import "Constant.h"
 #import "VideoPagerViewCell.h"
 #import "SDWebImage/UIImageView+WebCache.h"
+#import "VideoViewController.h"
 
 
 #define URL_PATH @"/imageData.php"
@@ -23,6 +24,7 @@
     NSArray *allImageData;
     NSDictionary *videoData;
     GalleryTableViewCell *protoTypeCell;
+    ImageInfo *iInfo;
 }
 
 #pragma mark -
@@ -104,7 +106,7 @@
 {
     DebugLog(@"");
     NSString *title = videoData.allKeys[indexPath.row];
-    NSArray *categorydata = (NSArray *)[videoData objectForKey:title];
+    NSArray *categorydata = [[NSArray alloc]initWithArray:(NSArray *)[videoData objectForKey:title]];
     cell.delegate = self;
     [cell addImages:categorydata];
     
@@ -127,8 +129,15 @@
 -(void) galleryTableViewOnImageSelected:(ImageInfo *)imageInfo
 {
     DebugLog(@"");
-    NSURL *imgURL = [NSURL URLWithString: [NSString stringWithFormat:@"%@/%@", SERVER_URL,imageInfo.imageURL] ];
-    //[imageView setImageWithURL:imgURL];
+    iInfo = imageInfo;
+    [self performSegueWithIdentifier:@"VideoViewController" sender:self];
+}
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"VideoViewController"]) {
+        VideoViewController *videoViewController = segue.destinationViewController;
+        videoViewController.imageInfo = iInfo;
+    }
 }
 
 #pragma mark -
@@ -152,8 +161,30 @@
     DebugLog(@"Row: %ld",(long)indexPath.row);
     GalleryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GalleryTableViewCell"];
     cell.clipsToBounds =YES;
-    [self configureCell:cell forRowAtIndexPath:indexPath];
+
+    if(indexPath.section == 0){
+        NSString *title = videoData.allKeys[0];
+        NSArray *categorydata = [[NSArray alloc]initWithArray:(NSArray *)[videoData objectForKey:title]];
+        cell.delegate = self;
+        [cell addImages:categorydata];
+        
+    }else if (indexPath.section == 1) {
+        NSString *title = videoData.allKeys[1];
+        NSArray *categorydata = [[NSArray alloc]initWithArray:(NSArray *)[videoData objectForKey:title]];
+        cell.delegate = self;
+        [cell addImages:categorydata];
+        
+    }else if (indexPath.section == 2){
+        NSString *title = videoData.allKeys[2];
+        NSArray *categorydata = [[NSArray alloc]initWithArray:(NSArray *)[videoData objectForKey:title]];
+        cell.delegate = self;
+        [cell addImages:categorydata];
+        
+    }
+    
+    //[self configureCell:cell forRowAtIndexPath:indexPath];
     return cell;
+    
 }
 
 
@@ -165,6 +196,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 175;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 40.0f;
 }
 
 #pragma mark -
@@ -179,7 +218,14 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     VideoPagerViewCell *cell = [ImageSliderCollection dequeueReusableCellWithReuseIdentifier:@"VideoCell" forIndexPath:indexPath];
-    cell.frame = ImageSliderCollection.frame;
+    NSString *title = videoData.allKeys[2];
+    NSArray *categorydata = [[NSArray alloc]initWithArray:(NSArray *)[videoData objectForKey:title]];
+    NSDictionary *imgInfo = categorydata[indexPath.row];
+    NSURL *imgURL = [NSURL URLWithString: [imgInfo objectForKey:@"imageUrl"]];
+    [cell.imageView sd_setImageWithURL:imgURL
+                    placeholderImage:[UIImage imageNamed:@""]
+                             options:SDWebImageRefreshCached];
+
     return  cell;
 }
 
@@ -188,9 +234,22 @@
     return 20; // This is the minimum inter item spacing, can be more
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    iInfo = nil;
+    [self performSegueWithIdentifier:@"VideoViewController" sender:self];
+
+}
+
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     int currentPage  = (int)(scrollView.contentOffset.x / scrollView.frame.size.width);
     [pageControl setCurrentPage: currentPage];
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(collectionView.frame.size.width, collectionView.frame.size.height);
 }
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {

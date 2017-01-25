@@ -26,7 +26,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="354" height="183"/>
                             </imageView>
                             <button opaque="NO" contentMode="right" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nHS-em-UHW">
-                                <rect key="frame" x="148.5" y="63" width="56" height="56"/>
+                                <rect key="frame" x="149" y="63" width="56" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="nHS-em-UHW" secondAttribute="height" multiplier="1:1" id="DoC-tu-c8p"/>
                                 </constraints>

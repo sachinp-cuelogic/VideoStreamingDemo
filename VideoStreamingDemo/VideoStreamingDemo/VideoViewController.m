@@ -27,7 +27,7 @@
 
 NSArray *videoArray;
 
-@synthesize videoListDict;
+@synthesize videoListDict,imageInfo;
 
 NSString *const kTestAppAdTagUrl =
 @"https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&"
@@ -55,13 +55,55 @@ NSString *const kTestAppAdTagUrl =
     NSLog( @"<%d - (%s)>", __LINE__, __FUNCTION__);
     [super viewDidLoad];
     
-//    [self addPlayer];
-    
-//    [self setUpContentPlayer];
-//    [self setupAdsLoader];
-//    [self requestAds];
-    
     [self readPlistFile];
+    NSURL *URL = URL  = [NSURL URLWithString:@"http://www.kapsolutions.in/atul/poc_video/phonegap/phonegap4.mp4?dl=0"];
+    if(imageInfo != nil){
+         URL = [NSURL URLWithString:[imageInfo valueForKey:@"videoUrl"]];
+
+    }else{
+         URL  = [NSURL URLWithString:@"http://www.kapsolutions.in/atul/poc_video/phonegap/phonegap4.mp4?dl=0"];
+    }
+    [self.player clean];
+    [self addPlayerWithURL:URL];
+    
+    [self setUpContentPlayer];
+    [self setupAdsLoader];
+    [self requestAds];
+    
+
+
+}
+- (IBAction)actionBack:(id)sender {
+    [self.player stop];
+    [self.player clean];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark -
+#pragma mark ==============================
+#pragma mark Status Bar
+#pragma mark ==============================
+
+-(void) setStatusBarHidden
+{
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        // iOS 7
+        [self prefersStatusBarHidden];
+        [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+    } else {
+        // iOS 6
+        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+    }
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 #pragma mark -
@@ -72,7 +114,19 @@ NSString *const kTestAppAdTagUrl =
 - (void) readPlistFile {
     NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"VideoData" ofType:@"plist"];
     NSDictionary *contentDict = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-    videoArray = [[NSArray alloc]initWithArray:[contentDict valueForKey:@"iOS"]];
+    
+    NSString *section = @"PhoneGap";
+    
+    if([[imageInfo valueForKey:@"imageUrl"] containsString:@"ios"]){
+        section =  @"iOS";
+    }
+    else    if([[imageInfo valueForKey:@"imageUrl"] containsString:@"android"]){
+        section =  @"Android";
+    }
+    else {
+        section =  @"PhoneGap";
+    }
+    videoArray = [[NSArray alloc]initWithArray:[contentDict valueForKey:section]];
     //videoArray = [NSArray arrayWithObject:[contentDict objectForKey:@"iOS"]];
     [_tblView reloadData];
 }
@@ -85,18 +139,16 @@ NSString *const kTestAppAdTagUrl =
 - (void) addPlayerWithURL:(NSURL *) url {
     NSLog( @"<%d - (%s)>", __LINE__, __FUNCTION__);
     
+    
     self.player = [[GUIPlayerView alloc] initWithFrame:CGRectMake(0,50, self.playerView.frame.size.width, self.playerView.frame.size.height)];
     [self.player setDelegate:self];
     [self.view addSubview:self.player];
     [self.view bringSubviewToFront:self.player];
     
     [self.player setVideoURL:url];
-    [self.player prepareAndPlayAutomatically:NO];
+    [self.player prepareAndPlayAutomatically:YES];
     [self.player play];
-    
-    
-    [self.player prepareAndPlayAutomatically:NO];
-    [self.player play];
+
 }
 
 - (void)playerWillEnterFullscreen {
@@ -264,6 +316,7 @@ NSString *const kTestAppAdTagUrl =
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.adsManager destroy];
     NSDictionary *videoDict = [[NSDictionary alloc] initWithDictionary:videoArray[indexPath.row]];
     NSString *urlString =  [videoDict valueForKey:@"videoUrl"];
     //NSURL *URL = [NSURL URLWithString:@"http://www.kapsolutions.in/atul/poc_video/android/android1.mp4"];

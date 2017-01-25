@@ -11,4 +11,5 @@
 @interface ImageInfo : NSObject
 @property (nonatomic, strong) NSString *imageName;
 @property (nonatomic, strong) NSString *imageURL;
+@property (nonatomic, strong) NSString *sectionName;
 @end

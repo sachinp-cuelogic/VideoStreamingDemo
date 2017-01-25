@@ -11,7 +11,7 @@
 #import "ImageInfo.h"
 
 @protocol GalleryTableViewCellProtocol <NSObject>
--(void) galleryTableViewOnImageSelected:(ImageInfo* ) imageInfo;
+-(void) galleryTableViewOnImageSelected:(ImageInfo *) imageInfo;
 @end
 
 @interface GalleryTableViewCell : UITableViewCell

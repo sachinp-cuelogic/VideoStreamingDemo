@@ -59,6 +59,7 @@
     [galleryCell.thumbnailView.thumbnailImageView sd_setImageWithURL:imgURL
                                                     placeholderImage:[UIImage imageNamed:@""]
                                                              options:SDWebImageRefreshCached];
+    galleryCell.thumbnailView.lblDesc.text = [imgInfo objectForKey:@"videoDetails"];
     
     return galleryCell;
 }

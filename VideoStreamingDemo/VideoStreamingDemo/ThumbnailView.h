@@ -10,4 +10,5 @@
 
 @interface ThumbnailView : UIView
 @property(nonatomic,strong) IBOutlet UIImageView *thumbnailImageView;
+@property(nonatomic,strong) IBOutlet UILabel *lblDesc;
 @end

@@ -153,12 +153,14 @@
   [currentTimeLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:13.0f]];
   [currentTimeLabel setTextAlignment:NSTextAlignmentCenter];
   [currentTimeLabel setTextColor:[UIColor whiteColor]];
+    //currentTimeLabel.hidden = YES;
   
   remainingTimeLabel = [UILabel new];
   [remainingTimeLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
   [remainingTimeLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:13.0f]];
   [remainingTimeLabel setTextAlignment:NSTextAlignmentCenter];
   [remainingTimeLabel setTextColor:[UIColor whiteColor]];
+    //remainingTimeLabel.hidden = YES;
   
   progressIndicator = [GUISlider new];
   [progressIndicator setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -408,8 +410,8 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:(duration >= 3600 ? @"hh:mm:ss": @"mm:ss")];
     
-    NSDate *currentTime = [NSDate dateWithTimeIntervalSince1970:current];
-    NSDate *remainingTime = [NSDate dateWithTimeIntervalSince1970:(duration - current)];
+    NSDate *currentTime = [NSDate dateWithTimeIntervalSince1970:current-1800];
+    NSDate *remainingTime = [NSDate dateWithTimeIntervalSince1970:(duration - current-1800)];
     
     [currentTimeLabel setText:[formatter stringFromDate:currentTime]];
     [remainingTimeLabel setText:[NSString stringWithFormat:@"-%@", [formatter stringFromDate:remainingTime]]];

@@ -10,6 +10,7 @@
 #import "GUIPlayerView.h"
 #import <GoogleInteractiveMediaAds/GoogleInteractiveMediaAds.h>
 #import "VideoTableViewCell.h"
+#import "ImageInfo.h"
 
 @interface VideoViewController : UIViewController
 {
@@ -17,6 +18,7 @@
 }
 
 @property (nonatomic,strong) NSDictionary *videoListDict;
+@property (nonatomic,strong) ImageInfo *imageInfo;
 
 @end
 

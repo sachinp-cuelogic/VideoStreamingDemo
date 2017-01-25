@@ -20,7 +20,18 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="nOw-hm-nUO">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="nOw-hm-nUO" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Gta-3E-M7F"/>
+                            <constraint firstItem="nOw-hm-nUO" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" id="iEk-7R-4Mc"/>
+                            <constraint firstAttribute="trailing" secondItem="nOw-hm-nUO" secondAttribute="trailing" id="kOo-NT-Q8p"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="nOw-hm-nUO" secondAttribute="bottom" id="qQT-My-xoc"/>
+                        </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                 </viewController>
@@ -29,4 +40,7 @@
             <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="splash" width="375" height="667"/>
+    </resources>
 </document>
