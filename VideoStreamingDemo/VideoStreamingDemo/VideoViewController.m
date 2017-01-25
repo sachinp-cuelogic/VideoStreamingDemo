@@ -57,9 +57,9 @@ NSString *const kTestAppAdTagUrl =
     
     [self addPlayer];
     
-    [self setUpContentPlayer];
-    [self setupAdsLoader];
-    [self requestAds];
+//    [self setUpContentPlayer];
+//    [self setupAdsLoader];
+//    [self requestAds];
     
     [self readPlistFile];
 }
@@ -72,7 +72,7 @@ NSString *const kTestAppAdTagUrl =
 - (void) readPlistFile {
     NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"VideoData" ofType:@"plist"];
     NSDictionary *contentDict = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-    videoArray = [NSArray arrayWithObject:[contentDict valueForKey:@"iOS"]][0];
+    videoArray = [[NSArray alloc]initWithArray:[contentDict valueForKey:@"iOS"]];
     //videoArray = [NSArray arrayWithObject:[contentDict objectForKey:@"iOS"]];
     [_tblView reloadData];
 }
@@ -88,16 +88,16 @@ NSString *const kTestAppAdTagUrl =
     self.player = [[GUIPlayerView alloc] initWithFrame:CGRectMake(0,50, self.playerView.frame.size.width, self.playerView.frame.size.height)];
     [self.player setDelegate:self];
     [self.view addSubview:self.player];
-    NSURL *URL1 = [NSURL URLWithString:@"http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"];
+    //NSURL *URL1 = [NSURL URLWithString:@"http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"];
     //NSURL *URL2 = [NSURL URLWithString:@"http://techslides.com/demos/sample-videos/small.mp4"];
-    //NSURL *URL3 = [NSURL URLWithString:@"https://youtu.be/71SbR2w3LP4"];
+    NSURL *URL3 = [NSURL URLWithString:@"https://www.dropbox.com/s/1szc1a4un6ouf7i/ios1.mp4?dl=0"];
     //NSURL *URL4 = [NSURL URLWithString:@"http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"];
-    [self.player setVideoURL:URL1];
+    [self.player setVideoURL:URL3];
     
-    [self.player prepareAndPlayAutomatically:NO];
+    [self.player prepareAndPlayAutomatically:YES];
     [self.view bringSubviewToFront:self.player];
     
-    //[self requestAds];
+    [self.player play];
 }
 
 - (void)playerWillEnterFullscreen {
@@ -109,11 +109,12 @@ NSString *const kTestAppAdTagUrl =
 }
 
 - (void)playerDidEndPlaying {
+    NSLog( @"<%d - (%s)>", __LINE__, __FUNCTION__);
     [self.adsLoader contentComplete];
 }
 
 - (void)playerFailedToPlayToEnd {
-    NSLog(@"Error: could not play video");
+    NSLog( @"<%d - (%s)>", __LINE__, __FUNCTION__);
     [self.player clean];
 }
 
@@ -233,43 +234,32 @@ NSString *const kTestAppAdTagUrl =
 #pragma mark ==============================
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    NSLog( @"<%d - (%s)>", __LINE__, __FUNCTION__);
+    //NSLog( @"<%d - (%s)>", __LINE__, __FUNCTION__);
     return 1;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    NSLog( @"<%d - (%s)>", __LINE__, __FUNCTION__);
+    //NSLog( @"<%d - (%s)>", __LINE__, __FUNCTION__);
     return videoArray.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog( @"<%d - (%s)>", __LINE__, __FUNCTION__);
+    //NSLog( @"<%d - (%s)>", __LINE__, __FUNCTION__);
     VideoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"VideoTableViewCell"];
     cell.clipsToBounds =YES;
     [self configureCell:cell forRowAtIndexPath:indexPath];
     return cell;
 }
 
-- (void)configureCell:(VideoTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog( @"<%d - (%s)>", __LINE__, __FUNCTION__);
-    NSArray *videoDataArr = videoArray[indexPath.row];
-   // NSDictionary *videoDict =
-//    cell.lblDetails = [videoDict valueForKey:@"videoDetails"];
-//    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:[videoDict objectForKey:@"videoUrl"]]
-//                 placeholderImage:[UIImage imageNamed:@""]
-//                          options:SDWebImageRefreshCached];
+- (void)configureCell:(VideoTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    //NSLog( @"<%d - (%s)>", __LINE__, __FUNCTION__);
+    NSDictionary *videoDict = [[NSDictionary alloc] initWithDictionary:videoArray[indexPath.row]]; //;
+    cell.lblDetails.text = [videoDict valueForKey:@"videoDetails"];
+    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:[videoDict objectForKey:@"imageUrl"]]
+                 placeholderImage:[UIImage imageNamed:@""]
+                          options:SDWebImageRefreshCached];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    NSLog( @"<%d - (%s)>", __LINE__, __FUNCTION__);
-    NSString *categoryName = @"Android";
-    return categoryName;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 40.0f;
-}
 
 @end
