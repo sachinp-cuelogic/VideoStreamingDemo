@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		C09D787A1E3203BE00AA47B7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C09D78791E3203BE00AA47B7 /* main.m */; };
 		C09D787D1E3203BE00AA47B7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C09D787C1E3203BE00AA47B7 /* AppDelegate.m */; };
-		C09D78801E3203BE00AA47B7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C09D787F1E3203BE00AA47B7 /* ViewController.m */; };
+		C09D78801E3203BE00AA47B7 /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C09D787F1E3203BE00AA47B7 /* VideoViewController.m */; };
 		C09D78831E3203BE00AA47B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C09D78811E3203BE00AA47B7 /* Main.storyboard */; };
 		C09D78851E3203BE00AA47B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C09D78841E3203BE00AA47B7 /* Assets.xcassets */; };
 		C09D78881E3203BE00AA47B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C09D78861E3203BE00AA47B7 /* LaunchScreen.storyboard */; };
@@ -36,8 +36,8 @@
 		C09D78791E3203BE00AA47B7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C09D787B1E3203BE00AA47B7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C09D787C1E3203BE00AA47B7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		C09D787E1E3203BE00AA47B7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		C09D787F1E3203BE00AA47B7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		C09D787E1E3203BE00AA47B7 /* VideoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoViewController.h; sourceTree = "<group>"; };
+		C09D787F1E3203BE00AA47B7 /* VideoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoViewController.m; sourceTree = "<group>"; };
 		C09D78821E3203BE00AA47B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C09D78841E3203BE00AA47B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C09D78871E3203BE00AA47B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -98,8 +98,8 @@
 				C09D78AB1E32242200AA47B7 /* GUIPlayer */,
 				C09D787B1E3203BE00AA47B7 /* AppDelegate.h */,
 				C09D787C1E3203BE00AA47B7 /* AppDelegate.m */,
-				C09D787E1E3203BE00AA47B7 /* ViewController.h */,
-				C09D787F1E3203BE00AA47B7 /* ViewController.m */,
+				C09D787E1E3203BE00AA47B7 /* VideoViewController.h */,
+				C09D787F1E3203BE00AA47B7 /* VideoViewController.m */,
 				C09D78811E3203BE00AA47B7 /* Main.storyboard */,
 				C09D78841E3203BE00AA47B7 /* Assets.xcassets */,
 				C09D78861E3203BE00AA47B7 /* LaunchScreen.storyboard */,
@@ -226,7 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C09D78801E3203BE00AA47B7 /* ViewController.m in Sources */,
+				C09D78801E3203BE00AA47B7 /* VideoViewController.m in Sources */,
 				C09D787D1E3203BE00AA47B7 /* AppDelegate.m in Sources */,
 				C09D78CC1E32242200AA47B7 /* UIView+UpdateAutoLayoutConstraints.m in Sources */,
 				C09D78CB1E32242200AA47B7 /* GUISlider.m in Sources */,
@@ -406,6 +406,7 @@
 				C09D788E1E3203BE00AA47B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

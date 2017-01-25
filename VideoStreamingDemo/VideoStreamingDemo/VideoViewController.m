@@ -6,13 +6,13 @@
 //  Copyright © 2017 Cuelogic Technologies. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "VideoViewController.h"
 
-@interface ViewController () <GUIPlayerViewDelegate,IMAAdsLoaderDelegate,IMAAdsManagerDelegate>
+@interface VideoViewController () <GUIPlayerViewDelegate,IMAAdsLoaderDelegate,IMAAdsManagerDelegate>
 
-@property (strong, nonatomic) GUIPlayerView* player;
-@property (strong, nonatomic) IBOutlet UIView* playerView;
-@property (strong, nonatomic) IMAAdsLoader *adsLoader;
+@property (nonatomic, strong) GUIPlayerView* player;
+@property (nonatomic, strong) IBOutlet UIView* playerView;
+@property (nonatomic, strong) IMAAdsLoader *adsLoader;
 
 @property(nonatomic, strong) IMAAVPlayerContentPlayhead *contentPlayhead;
 @property(nonatomic, strong) IMAAdsManager *adsManager;
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation ViewController
+@implementation VideoViewController
 
 NSString *const kTestAppAdTagUrl =
 @"https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&"

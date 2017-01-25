@@ -10,7 +10,7 @@
 #import "GUIPlayerView.h"
 #import <GoogleInteractiveMediaAds/GoogleInteractiveMediaAds.h>
 
-@interface ViewController : UIViewController
+@interface VideoViewController : UIViewController
 
 
 @end
